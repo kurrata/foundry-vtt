@@ -1,0 +1,10 @@
+version: '3'
+services:
+  foundry:
+    build: docker/foundry
+    ports: 
+      - 30000:30000
+    volumes:
+      - ${DATA_DIR}:/home/foundry/data
+      - ${APP_DIR}:/home/foundry/install
+    restart: unless-stopped
