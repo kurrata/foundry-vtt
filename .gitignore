@@ -1,1 +1,2 @@
 /.env
+/docker/nginx/default.conf
