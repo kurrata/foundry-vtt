@@ -7,11 +7,20 @@ services:
       - ${APP_DIR}:/home/foundry/install
     restart: unless-stopped
 
-  nginx:
-    image: nginx
-    ports:
-      - 80:80
-      - 433:433
+  swag:
+    image: linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - URL=${DOMAIN_URL}
+      - VALIDATION=http
     volumes:
-        - ./docker/nginx/:/etc/nginx/conf.d/
+      - ./docker/nginx/default.conf:/config/nginx/site-confs/default
+    ports:
+      - 443:443
+      - 80:80
     restart: unless-stopped
